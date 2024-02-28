@@ -1,5 +1,5 @@
 <template>
-  <div id="chartdiv" style="width: 100%; height: 500px"></div>
+  <div id="chartdiv""></div>
 </template>
 
 <script>
@@ -18,10 +18,13 @@ export default {
       const root = am5.Root.new("chartdiv");
       const chart = root.container.children.push(
         am5map.MapChart.new(root, {
-          panX: "rotateX",
-          panY: "translateY",
           projection: am5map.geoMercator(),
           homeGeoPoint: { longitude: 0, latitude: 0 },
+          panX: "none",
+          panY: "none",
+          wheelX: "none",
+          wheelY: "none",
+          pinchZoom: false,
         })
       );
 
@@ -74,7 +77,7 @@ export default {
 
 <style>
 #chartdiv {
-  width: 100%;
-  height: 500px;
+  width: 500px;
+  height: 800px;
 }
 </style>
