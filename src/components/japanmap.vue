@@ -36,14 +36,25 @@ export default {
         tooltipText: "{name}",
         interactive: true,
         templateField: "settings",
-        toggleKey: "active",
       });
 
-      polygonSeries.mapPolygons.template.states.create("hover", {
+      polygonSeries.mapPolygons.template.events.on("hover", {
         fill: am5.Color.fromHex(0xffba00),
       });
-      polygonSeries.mapPolygons.template.states.create("active", {
-        fill: root.interfaceColors.get("primaryButtonDown"),
+
+      let activePolygon;
+      polygonSeries.mapPolygons.template.events.on("click", (ev) => {
+        const polygon = ev.target;
+        if (activePolygon !== polygon) {
+          for (let i = 0; i < polygonSeries.mapPolygons.length; i++) {
+            const polygon = polygonSeries.mapPolygons.getIndex(i);
+            polygon.set("fill", am5.Color.fromHex(0x6794dc));
+          }
+          polygon.set("fill", am5.Color.fromHex(0x85c5e3));
+          activePolygon = polygon;
+          selectedPrefecture.value = polygon.dataItem.dataContext.name;
+          console.log("Selected region:", selectedPrefecture.value);
+        }
       });
     };
 
