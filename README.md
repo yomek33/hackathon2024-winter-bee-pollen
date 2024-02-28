@@ -1,4 +1,4 @@
-# vue-project
+# BeePollen@hackathon2024-winter-bee-pollen
 
 This template should help get you started developing with Vue 3 in Vite.
 
