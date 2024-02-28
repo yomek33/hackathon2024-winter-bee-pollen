@@ -14,6 +14,7 @@ export default {
     const selectedPrefecture = ref(null);
 
     const loadMap = () => {
+      //Mapを作る
       const root = am5.Root.new("chartdiv");
       const chart = root.container.children.push(
         am5map.MapChart.new(root, {
@@ -29,35 +30,39 @@ export default {
           geoJSON: am5geodata_japanLow,
           valueField: "value",
           calculateAggregates: true,
+          fill: am5.color(0xf3f3f3),
+          stroke: am5.color(0x000000),
         })
       );
 
       polygonSeries.mapPolygons.template.setAll({
-        tooltipText: "{name}",
         interactive: true,
         templateField: "settings",
       });
 
-      polygonSeries.mapPolygons.template.events.on("hover", {
-        fill: am5.Color.fromHex(0xffba00),
+      polygonSeries.mapPolygons.template.states.create("highlight", {
+        fill: am5.color(0x6794dc),
+        stroke: am5.color(0x6794dc),
       });
 
+      //Clickされたら、その県の名前を表示して着色する
       let activePolygon;
       polygonSeries.mapPolygons.template.events.on("click", (ev) => {
         const polygon = ev.target;
-        if (activePolygon !== polygon) {
-          for (let i = 0; i < polygonSeries.mapPolygons.length; i++) {
-            const polygon = polygonSeries.mapPolygons.getIndex(i);
-            polygon.set("fill", am5.Color.fromHex(0x6794dc));
-          }
-          polygon.set("fill", am5.Color.fromHex(0x85c5e3));
-          activePolygon = polygon;
+        if (activePolygon && activePolygon !== polygon) {
+          activePolygon.states.applyAnimate("default");
+          activePolygon = undefined;
           selectedPrefecture.value = polygon.dataItem.dataContext.name;
           console.log("Selected region:", selectedPrefecture.value);
         }
+        polygon.states.applyAnimate("highlight");
+        activePolygon = polygon;
+      });
+      polygonSeries.mapPolygons.template.events.on("hover", (ev) => {
+        const polygon = ev.target;
+        polygon.states.applyAnimate("highlight");
       });
     };
-
     onMounted(() => {
       loadMap();
     });
