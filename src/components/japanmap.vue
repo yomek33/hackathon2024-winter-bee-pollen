@@ -20,6 +20,7 @@ export default {
     const selectedPrefectureId = ref(0);
     const releases = ref([]);
 
+    // NOTE: 日本地図を描写し、クリックした都道府県のプレスリリースを一覧で表示させる
     const loadMap = () => {
       // Mapを作る
       const root = am5.Root.new("chartdiv");
@@ -64,7 +65,7 @@ export default {
           activePolygon = undefined;
           selectedPrefecture.value = polygon.dataItem.dataContext.name;
           console.log("Selected region:", selectedPrefecture.value);
-          getReleasesByPrefectureName(selectedPrefecture.value); // 都道府県をIDに変換する
+          getReleasesByPrefectureName(selectedPrefecture.value); // NOTE: プレスリリース一覧を取得
         }
         selectedPrefecture.value = polygon.dataItem.dataContext.name;
         console.log("Selected region:", selectedPrefecture.value);
@@ -77,18 +78,24 @@ export default {
       });
     };
 
+    // NOTE: クリックによって渡された都道府県（アルファベット）をゴニョゴニョ変換してプレスリリースを取得する
     const getReleasesByPrefectureName = async () => {
       try {
-        const prefectureId = await prefectureIdFromName('岩手県');
-        console.log(prefectureId);
+        // TODO: 英語で渡される都道府県を、日本語に変換する
+        // ex.) Iwate → 岩手県
+        // const prefectureName = convertEnToJa('Miyagi')
+        // ex.) 岩手県 → 5
+        const prefectureId = await prefectureIdFromName('宮城県');
+        // ex.) 岩手県のID:5をもとに、岩手県のプレスリリースを取得
         await requestGetReleases(prefectureId);
       } catch (error) {
         console.error("Error occurred while getting releases:", error);
       }
     };
 
-    // 都道府県の名前から都道府県のIDを取得する
+    // NOTE: 都道府県の名前（日本語）から都道府県のIDを取得する
     const prefectureIdFromName = async (selectedPrefectureName) => {
+      // TODO: 環境変数にしまう
       const ACCESS_TOKEN = "37aaaf2e5398eec3521ca0408f9e0817999d81e014c000a3e65b55e6a807060c";
       const BASE_URL = "https://hackathon.stg-prtimes.net/api";
       const url = `${BASE_URL}/prefectures`;
@@ -111,8 +118,9 @@ export default {
       return prefecture ? prefecture.id : null;
     }
 
-    // 特定の都道府県に紐づくRelease一覧を取得する
+    // NOTE: 都道府県のIDから、Release一覧を取得する
     const requestGetReleases = async (selectedPrefectureId) => {
+      // TODO: 環境変数にしまう
       const ACCESS_TOKEN = "37aaaf2e5398eec3521ca0408f9e0817999d81e014c000a3e65b55e6a807060c";
       const BASE_URL = "https://hackathon.stg-prtimes.net/api";
       const url = `${BASE_URL}/prefectures/${selectedPrefectureId}/releases`;
@@ -134,6 +142,7 @@ export default {
       releases.value = data; // 取得したJSONデータを releases に設定する
     };
 
+    // NOTE: 最初に日本地図を描画するのに必要
     onMounted(() => {
       loadMap();
     });
