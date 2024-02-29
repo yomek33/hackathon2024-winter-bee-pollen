@@ -89,7 +89,6 @@ export default {
     // NOTE: クリックによって渡された都道府県（アルファベット）をゴニョゴニョ変換してプレスリリースを取得する
     const getReleasesByPrefectureName = async (prefectureNameEn) => {
       try {
-        // TODO: 英語で渡される都道府県を、日本語に変換する
         // ex.) Iwate → 岩手県
         const prefectureName = prefectureNames[prefectureNameEn]
         // ex.) 岩手県 → 5
