@@ -21,6 +21,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_japanLow from "@amcharts/amcharts5-geodata/japanLow";
 import { ref, onMounted } from "vue";
+import store from '@/store.js'
 
 export default {
   name: "MapComponent",
@@ -94,7 +95,8 @@ export default {
         // ex.) 岩手県 → 5
         const prefectureId = await prefectureIdFromName(prefectureName);
         // ex.) 岩手県のID:5をもとに、岩手県のプレスリリースを取得
-        await requestGetReleases(prefectureId);
+        // NOTE: storeで管理しているprefectureIdに上書きする。
+        store.commit('updatePrefectureId', prefectureId);
       } catch (error) {
         console.error("Error occurred while getting releases:", error);
       }
@@ -124,30 +126,6 @@ export default {
       const prefecture = data.find(prefecture => prefecture.name === selectedPrefectureName);
       return prefecture ? prefecture.id : null;
     }
-
-    // NOTE: 都道府県のIDから、Release一覧を取得する
-    const requestGetReleases = async (selectedPrefectureId) => {
-      // TODO: 環境変数にしまう
-      const ACCESS_TOKEN = "37aaaf2e5398eec3521ca0408f9e0817999d81e014c000a3e65b55e6a807060c";
-      const BASE_URL = "https://hackathon.stg-prtimes.net/api";
-      const url = `${BASE_URL}/prefectures/${selectedPrefectureId}/releases`;
-      const headers = {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${ACCESS_TOKEN}`
-      };
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: headers
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      releases.value = data; // 取得したJSONデータを releases に設定する
-    };
 
     const prefectureNames = {
       "Aichi": "愛知県",
@@ -205,7 +183,7 @@ export default {
     });
 
     return { selectedPrefecture, selectedPrefectureId, releases };
-  },
+  }
 };
 </script>
 
