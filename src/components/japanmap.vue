@@ -96,6 +96,8 @@ export default {
         const prefectureId = await prefectureIdFromName(prefectureName);
         // ex.) 岩手県のID:5をもとに、岩手県のプレスリリースを取得
         // NOTE: storeで管理しているprefectureIdに上書きする。
+        console.log("japanmapです")
+        console.log(store.state.prefectureId)
         store.commit('updatePrefectureId', prefectureId);
       } catch (error) {
         console.error("Error occurred while getting releases:", error);
