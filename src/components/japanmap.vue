@@ -1,9 +1,18 @@
 <template>
-  <div id="chartdiv"></div>
-  <div v-for="release in releases" :key="release.id">
-    <span class="">
-      {{ release.company_name }}
-    </span>
+  <div class="flex">
+    <div class="w-1/2">
+      <div id="chartdiv"></div>
+    </div>
+    <div class="w-1/2">
+      <div v-if="releases.length !== 0" v-for="release in releases" :key="release.id">
+        <div class="mt-4 ml-4">
+          {{ release.company_name }}
+        </div>
+      </div>
+      <div v-else class="">
+        <div class="mt-4 ml-4">No releases.</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -64,7 +73,6 @@ export default {
           activePolygon.states.applyAnimate("default");
           activePolygon = undefined;
           selectedPrefecture.value = polygon.dataItem.dataContext.name;
-          console.log("Selected region:", selectedPrefecture.value);
           getReleasesByPrefectureName(selectedPrefecture.value); // NOTE: プレスリリース一覧を取得
         }
         selectedPrefecture.value = polygon.dataItem.dataContext.name;
@@ -79,13 +87,13 @@ export default {
     };
 
     // NOTE: クリックによって渡された都道府県（アルファベット）をゴニョゴニョ変換してプレスリリースを取得する
-    const getReleasesByPrefectureName = async () => {
+    const getReleasesByPrefectureName = async (prefectureNameEn) => {
       try {
         // TODO: 英語で渡される都道府県を、日本語に変換する
         // ex.) Iwate → 岩手県
-        // const prefectureName = convertEnToJa('Miyagi')
+        const prefectureName = prefectureNames[prefectureNameEn]
         // ex.) 岩手県 → 5
-        const prefectureId = await prefectureIdFromName('宮城県');
+        const prefectureId = await prefectureIdFromName(prefectureName);
         // ex.) 岩手県のID:5をもとに、岩手県のプレスリリースを取得
         await requestGetReleases(prefectureId);
       } catch (error) {
@@ -140,6 +148,56 @@ export default {
 
       const data = await response.json();
       releases.value = data; // 取得したJSONデータを releases に設定する
+    };
+
+    const prefectureNames = {
+      "Aichi": "愛知県",
+      "Akita": "秋田県",
+      "Aomori": "青森県",
+      "Chiba": "千葉県",
+      "Ehime": "愛媛県",
+      "Fukui": "福井県",
+      "Fukuoka": "福岡県",
+      "Fukushima": "福島県",
+      "Gifu": "岐阜県",
+      "Gunma": "群馬県",
+      "Hiroshima": "広島県",
+      "Hokkaido": "北海道",
+      "Hyogo": "兵庫県",
+      "Ibaraki": "茨城県",
+      "Ishikawa": "石川県",
+      "Iwate": "岩手県",
+      "Kagawa": "香川県",
+      "Kagoshima": "鹿児島県",
+      "Kanagawa": "神奈川県",
+      "Kochi": "高知県",
+      "Kumamoto": "熊本県",
+      "Kyoto": "京都府",
+      "Mie": "三重県",
+      "Miyagi": "宮城県",
+      "Miyazaki": "宮崎県",
+      "Nagano": "長野県",
+      "Nagasaki": "長崎県",
+      "Nara": "奈良県",
+      "Niigata": "新潟県",
+      "Oita": "大分県",
+      "Okayama": "岡山県",
+      "Okinawa": "沖縄県",
+      "Osaka": "大阪府",
+      "Saga": "佐賀県",
+      "Saitama": "埼玉県",
+      "Shiga": "滋賀県",
+      "Shimane": "島根県",
+      "Shizuoka": "静岡県",
+      "Tochigi": "栃木県",
+      "Tokushima": "徳島県",
+      "Tokyo": "東京都",
+      "Tottori": "鳥取県",
+      "Toyama": "富山県",
+      "Wakayama": "和歌山県",
+      "Yamagata": "山形県",
+      "Yamaguchi": "山口県",
+      "Yamanashi": "山梨県"
     };
 
     // NOTE: 最初に日本地図を描画するのに必要
