@@ -55,9 +55,9 @@ export default {
         if (activePolygon && activePolygon !== polygon) {
           activePolygon.states.applyAnimate("default");
           activePolygon = undefined;
-          selectedPrefecture.value = polygon.dataItem.dataContext.name;
-          console.log("Selected region:", selectedPrefecture.value);
         }
+        selectedPrefecture.value = polygon.dataItem.dataContext.name;
+        console.log("Selected region:", selectedPrefecture.value);
         polygon.states.applyAnimate("highlight");
         activePolygon = polygon;
       });
