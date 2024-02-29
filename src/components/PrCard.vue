@@ -1,6 +1,6 @@
 <script>
 import { watch } from "vue";
-import store from "@/store.js";
+import { prefecture } from "@/store.js";
 
 const baseURL = 'https://hackathon.stg-prtimes.net/api/'
 const token = import.meta.env.VITE_PRTIMES_TOKEN
@@ -14,7 +14,7 @@ const releaseCard = {
   methods: {
     async fetchData() {
       try {
-        const path=`prefectures/${this.getPrefectureId()}/releases`
+        const path=`prefectures/${prefecture.id}/releases`
         const response = await fetch(baseURL+path, {
           method: 'GET',
           headers: {
@@ -28,14 +28,14 @@ const releaseCard = {
         console.error('Error fetching data:', error);
       }
     },
-    getPrefectureId() {
-      console.log(store.state.prefectureId) // TODO: debuggerなので削除する
-      return store.state.prefectureId
-    }
+    // getPrefectureId() {
+    //   console.log(store.state.prefectureId) // TODO: debuggerなので削除する
+    //   return store.state.prefectureId
+    // }
   },
   created() {
-    watch(() => store.state.prefectureId, (newValue, oldValue) => {
-      this.getPrefectureId();
+    watch(() => prefecture.id, (newValue, oldValue) => {
+      // this.getPrefectureId();
       console.log('prefectureId changed');
       this.fetchData();
     }, { immediate: true });

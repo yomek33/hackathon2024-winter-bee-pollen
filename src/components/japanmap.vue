@@ -21,7 +21,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_japanLow from "@amcharts/amcharts5-geodata/japanLow";
 import { ref, onMounted } from "vue";
-import store from '@/store.js'
+import { prefecture } from '@/store.js'
 
 export default {
   name: "MapComponent",
@@ -96,8 +96,9 @@ export default {
         const prefectureId = await prefectureIdFromName(prefectureName);
         // ex.) 岩手県のID:5をもとに、岩手県のプレスリリースを取得
         // NOTE: storeで管理しているprefectureIdに上書きする。
-        console.log(store.state.prefectureId) // TODO: debuggerなので削除する
-        store.commit('updatePrefectureId', prefectureId);
+        // console.log(store.state.prefectureId) // TODO: debuggerなので削除する
+        // store.commit('updatePrefectureId', prefectureId);
+        prefecture.id = prefectureId;
       } catch (error) {
         console.error("Error occurred while getting releases:", error);
       }
