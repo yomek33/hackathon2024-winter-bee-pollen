@@ -27,8 +27,7 @@ const releaseCard = {
       }
     },
     getPrefectureId() {
-      console.log("prcです")
-      console.log(store.state.prefectureId)
+      console.log(store.state.prefectureId) // TODO: debuggerなので削除する
       return store.state.prefectureId
     }
   },
