@@ -1,5 +1,10 @@
 <template>
   <div id="chartdiv"></div>
+  <div v-for="release in releases" :key="release.id">
+    <span class="">
+      {{ release.company_name }}
+    </span>
+  </div>
 </template>
 
 <script>
@@ -12,9 +17,11 @@ export default {
   name: "MapComponent",
   setup() {
     const selectedPrefecture = ref(null);
+    const selectedPrefectureId = ref(0);
+    const releases = ref([]);
 
     const loadMap = () => {
-      //Mapを作る
+      // Mapを作る
       const root = am5.Root.new("chartdiv");
       const chart = root.container.children.push(
         am5map.MapChart.new(root, {
@@ -48,7 +55,7 @@ export default {
         stroke: am5.color(0x6794dc),
       });
 
-      //Clickされたら、その県の名前を表示して着色する
+      // Clickされたら、その県の名前を表示して着色する
       let activePolygon;
       polygonSeries.mapPolygons.template.events.on("click", (ev) => {
         const polygon = ev.target;
@@ -57,6 +64,7 @@ export default {
           activePolygon = undefined;
           selectedPrefecture.value = polygon.dataItem.dataContext.name;
           console.log("Selected region:", selectedPrefecture.value);
+          getReleasesByPrefectureName(selectedPrefecture.value); // 都道府県をIDに変換する
         }
         polygon.states.applyAnimate("highlight");
         activePolygon = polygon;
@@ -66,11 +74,69 @@ export default {
         polygon.states.applyAnimate("highlight");
       });
     };
+
+    const getReleasesByPrefectureName = async () => {
+      try {
+        const prefectureId = await prefectureIdFromName('岩手県');
+        console.log(prefectureId);
+        await requestGetReleases(prefectureId);
+      } catch (error) {
+        console.error("Error occurred while getting releases:", error);
+      }
+    };
+
+    // 都道府県の名前から都道府県のIDを取得する
+    const prefectureIdFromName = async (selectedPrefectureName) => {
+      const ACCESS_TOKEN = "37aaaf2e5398eec3521ca0408f9e0817999d81e014c000a3e65b55e6a807060c";
+      const BASE_URL = "https://hackathon.stg-prtimes.net/api";
+      const url = `${BASE_URL}/prefectures`;
+      const headers = {
+        "Accept": "application/json",
+        "Authorization": `Bearer ${ACCESS_TOKEN}`
+      };
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: headers
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      const prefecture = data.find(prefecture => prefecture.name === selectedPrefectureName);
+      return prefecture ? prefecture.id : null;
+    }
+
+    // 特定の都道府県に紐づくRelease一覧を取得する
+    const requestGetReleases = async (selectedPrefectureId) => {
+      const ACCESS_TOKEN = "37aaaf2e5398eec3521ca0408f9e0817999d81e014c000a3e65b55e6a807060c";
+      const BASE_URL = "https://hackathon.stg-prtimes.net/api";
+      const url = `${BASE_URL}/prefectures/${selectedPrefectureId}/releases`;
+      const headers = {
+        "Accept": "application/json",
+        "Authorization": `Bearer ${ACCESS_TOKEN}`
+      };
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: headers
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      releases.value = data; // 取得したJSONデータを releases に設定する
+    };
+
     onMounted(() => {
       loadMap();
     });
 
-    return { selectedPrefecture };
+    return { selectedPrefecture, selectedPrefectureId, releases };
   },
 };
 </script>
