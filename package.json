@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@amcharts/amcharts5": "^5.8.4",
+    "@amcharts/amcharts5-geodata": "^5.1.2",
+    "jquery": "^3.7.1",
     "tailwindcss": "^3.4.1",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
