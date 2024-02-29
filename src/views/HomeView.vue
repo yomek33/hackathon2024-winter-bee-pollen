@@ -11,14 +11,14 @@
       <div class="w-1/2 ml-8 border-2 p-8 rounded-lg">
         <h2 class="text-lg mb-5">北海道札幌市　リリース一覧</h2>
         
-        <div class="accordion">
-          <button class="accordion-title">業種を選ぶ</button>
+        <details class="accordion">
+          <summary>業種を選ぶ</summary>
           <div class="checkbox flex flex-wrap">
             <label class="flex items-center relative"><input type="checkbox" name="" id="">建築</label>
             <label><input type="checkbox" name="" id="">金融サービス</label>
             <!-- ここはクリックするたびに変更するのか、選択してからまとめて変更するのか、どちらにしましょうか -->
           </div>
-        </div>
+        </details>
 
         <div class="articles divide-y divide-slate-500/2">
           <div class="article flex mt-3 pt-3">
@@ -132,22 +132,21 @@ main{
     margin-bottom: 7px;
 }
 
-.accordion button {
+.accordion summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 1em 2em;
     color: #333333;
     font-weight: 600;
     cursor: pointer;
 }
 
-.accordion button::-webkit-details-marker {
+.accordion summary::-webkit-details-marker {
     display: none;
 }
 
-.accordion button::after {
+/* .accordion summary::after {
     transform: translateY(-25%) rotate(45deg);
     width: 7px;
     height: 7px;
@@ -156,9 +155,9 @@ main{
     border-right: 3px solid #333333b3;
     content: '';
     transition: transform .3s;
-}
+} */
 
-.accordion[open] button::after {
+.accordion[open] summary::after {
     transform: rotate(225deg);
 }
 
