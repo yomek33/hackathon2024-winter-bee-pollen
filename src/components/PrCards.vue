@@ -1,3 +1,6 @@
+<!-- caution press releaseは./PrCard.vueを使用します。 -->
+<!-- watcher を使用して取得するテスト -->
+
 <script setup>
 import { ref, watch } from 'vue'
 
@@ -10,7 +13,7 @@ const loading = ref(false)
 
 // watch works directly on a ref
 watch(question, async (newQuestion, oldQuestion) => {
-  if (newQuestion.includes('?')) {
+
     loading.value = true
     answer.value = 'Thinking...'
     try {
@@ -27,14 +30,6 @@ watch(question, async (newQuestion, oldQuestion) => {
     } catch (error) {
       answer.value = 'Error! Could not reach the API. ' + error
     }
-    //  finally {
-    //   loading.value = false
-    //   answer.value = "Error! Timeout."
-    // }
-  }else{
-    loading.value = false
-    answer.value = "itznt y/n question"
-  }
 })
 </script>
 
