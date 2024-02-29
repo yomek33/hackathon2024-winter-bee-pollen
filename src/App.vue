@@ -1,11 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import HomeView from "./views/HomeView.vue";
+import japanmap from "./components/japanmap.vue";
 </script>
 
 <template>
   <header></header>
-  <HomeView />>
+  <HomeView />
+  <japanmap />
   <RouterView />
 </template>
 
