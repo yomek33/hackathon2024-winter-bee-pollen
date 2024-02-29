@@ -1,58 +1,51 @@
-
 <script>
-  import japanmap from "./japanmap.vue";
+import { watch } from "vue";
+import store from "@/store.js";
 
-  const url = 'https://hackathon.stg-prtimes.net/api/prefectures/1/releases'
-  const token = import.meta.env.VITE_PRTIMES_TOKEN
+const token = "37aaaf2e5398eec3521ca0408f9e0817999d81e014c000a3e65b55e6a807060c"
 
-  const releaseCard = {
-    data() {
-      return {
-        items: [],
-      };
-    },
-    onMounted() {
-      this.fetchData();
-    },
-    methods: {
-      async fetchData() {
-        try {
-          const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            }
-          });
-          const data = await response.json();
-          this.items = data; 
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+const releaseCard = {
+  data() {
+    return {
+      items: [],
+    };
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await fetch(`https://hackathon.stg-prtimes.net/api/prefectures/${this.getPrefectureId()}/releases`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
+        });
+        const data = await response.json();
+        this.items = data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     },
-    watch: {
-      // 変更したい値を監視する
-      japanmap: { //監視したい値を入れる
-        immediate: true,
-        handler() {
-          // japanmap が変更するとともに、fetchDataを実行する
-          // こちらはviewなので監視するのみ？
-          // Setupのhook理解できてない
-          console.log('japanmap changed');
-          this.fetchData();
-        }
-      }
+    getPrefectureId() {
+      console.log(store.state.prefectureId) // TODO: debuggerなので削除する
+      return store.state.prefectureId
     }
-  };
+  },
+  created() {
+    watch(() => store.state.prefectureId, (newValue, oldValue) => {
+      this.getPrefectureId();
+      console.log('prefectureId changed');
+      this.fetchData();
+    }, { immediate: true });
+  }
+};
 
-  export default releaseCard;
+export default releaseCard;
 </script>
 
 
 <template>
   <div>
-
     <button @click="fetchData">Search</button>
     <ul>
       <li v-for="item in items" >
