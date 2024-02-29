@@ -66,6 +66,8 @@ export default {
           console.log("Selected region:", selectedPrefecture.value);
           getReleasesByPrefectureName(selectedPrefecture.value); // 都道府県をIDに変換する
         }
+        selectedPrefecture.value = polygon.dataItem.dataContext.name;
+        console.log("Selected region:", selectedPrefecture.value);
         polygon.states.applyAnimate("highlight");
         activePolygon = polygon;
       });
