@@ -1,6 +1,7 @@
 
 <script>
-  // Vueコンポーネントの名前を指定
+  import japanmap from "./japanmap.vue";
+
   const url = 'https://hackathon.stg-prtimes.net/api/prefectures/1/releases'
   const token = import.meta.env.VITE_PRTIMES_TOKEN
 
@@ -31,8 +32,17 @@
       }
     },
     watch: {
-      // on click button
-
+      // 変更したい値を監視する
+      japanmap: { //監視したい値を入れる
+        immediate: true,
+        handler() {
+          // japanmap が変更するとともに、fetchDataを実行する
+          // こちらはviewなので監視するのみ？
+          // Setupのhook理解できてない
+          console.log('japanmap changed');
+          this.fetchData();
+        }
+      }
     }
   };
 
@@ -42,6 +52,7 @@
 
 <template>
   <div>
+
     <button @click="fetchData">Search</button>
     <ul>
       <li v-for="item in items" >
