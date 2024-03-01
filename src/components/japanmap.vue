@@ -57,17 +57,18 @@ export default {
       let activePolygon;
       polygonSeries.mapPolygons.template.events.on("click", (ev) => {
         const polygon = ev.target;
-        if (activePolygon && activePolygon !== polygon) {
-          activePolygon.states.applyAnimate("default");
-          activePolygon = undefined;
-          selectedPrefecture.value = polygon.dataItem.dataContext.name;
-          getReleasesByPrefectureName(selectedPrefecture.value); // NOTE: プレスリリース一覧を取得
-        }
         selectedPrefecture.value = polygon.dataItem.dataContext.name;
         console.log("Selected region:", selectedPrefecture.value);
         polygon.states.applyAnimate("highlight");
+
+        if (activePolygon && activePolygon !== polygon) {
+          activePolygon.states.applyAnimate("default");
+        }
+
         activePolygon = polygon;
+        getReleasesByPrefectureName(selectedPrefecture.value); // NOTE: プレスリリース一覧を取得
       });
+
       polygonSeries.mapPolygons.template.events.on("hover", (ev) => {
         const polygon = ev.target;
         polygon.states.applyAnimate("highlight");
