@@ -1,16 +1,25 @@
-import { createStore } from 'vuex';
+// store.js
+import { reactive } from 'vue'
 
-export default createStore({
-    state: {
-        prefectureId: 0,
-        prefectureName: ''
+export const prefecture = reactive({
+    id: 0,
+    name: '',
+    getid() {
+        return this.id
     },
-    mutations: {
-        updatePrefectureId(state, newId) {
-            state.prefectureId = newId;
-        },
-        updatePrefectureName(state, newName) {
-            state.prefectureName = newName;
-        }
+    setid(newid) {
+        this.id = newid
+    }
+});
+
+export const job = reactive({
+    id: 0,
+    name: '',
+    getid() {
+        return this.id
+    },
+    setid(newid) {
+        this.id = newid
+
     }
 });

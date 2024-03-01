@@ -3,7 +3,7 @@ import { computed } from 'vue'
 // import store from '@/store.js'
 import { prefecture } from '@/store.js'
 import japanmap from '@/components/japanmap.vue'
-import PrCard from '@/components/PrCard.vue'
+import PrCard from '@/components/PrCardJob.vue'
 
 export default {
     components: {

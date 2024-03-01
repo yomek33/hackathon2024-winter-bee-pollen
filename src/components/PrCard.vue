@@ -1,8 +1,9 @@
 <script>
 import { watch } from "vue";
-import store from "@/store.js";
+import { prefecture } from "@/store.js";
 
-const token = "37aaaf2e5398eec3521ca0408f9e0817999d81e014c000a3e65b55e6a807060c"
+const baseURL = 'https://hackathon.stg-prtimes.net/api/'
+const token = import.meta.env.VITE_PRTIMES_TOKEN
 
 const releaseCard = {
   data() {
@@ -13,7 +14,8 @@ const releaseCard = {
   methods: {
     async fetchData() {
       try {
-        const response = await fetch(`https://hackathon.stg-prtimes.net/api/prefectures/${this.getPrefectureId()}/releases`, {
+        const path=`prefectures/${prefecture.id}/releases`
+        const response = await fetch(baseURL+path, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -26,14 +28,14 @@ const releaseCard = {
         console.error('Error fetching data:', error);
       }
     },
-    getPrefectureId() {
-      console.log(store.state.prefectureId) // TODO: debuggerなので削除する
-      return store.state.prefectureId
-    }
+    // getPrefectureId() {
+    //   console.log(store.state.prefectureId) // TODO: debuggerなので削除する
+    //   return store.state.prefectureId
+    // }
   },
   created() {
-    watch(() => store.state.prefectureId, (newValue, oldValue) => {
-      this.getPrefectureId();
+    watch(() => prefecture.id, (newValue, oldValue) => {
+      // this.getPrefectureId();
       console.log('prefectureId changed');
       this.fetchData();
     }, { immediate: true });
