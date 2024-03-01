@@ -8,7 +8,6 @@ import PrCard from "@/components/PrCard.vue";
   <header></header>
   <HomeView />
   <!-- <PrCard /> -->
-  <RouterView />
 </template>
 
 <style scoped></style>

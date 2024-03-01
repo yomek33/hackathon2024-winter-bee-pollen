@@ -1,8 +1,10 @@
 <script>
 import japanmap from "../components/japanmap.vue";
+import PrCard from "../components/PrCard.vue";
 export default {
   components: {
     japanmap,
+    PrCard,
   },
 };
 </script>
@@ -30,63 +32,7 @@ export default {
         </details>
 
         <div class="articles divide-y divide-slate-500/2">
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-200">
-              <img src="" alt="" />
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-slate-700/95">
-                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
-              </p>
-              <p class="text-xs text-slate-400"></p>
-            </div>
-          </div>
-
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-300">
-              <img src="" alt="" />
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">
-                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
-              </p>
-            </div>
-          </div>
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-500">
-              <img src="" alt="" />
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">
-                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
-              </p>
-            </div>
-          </div>
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-400">
-              <img src="" alt="" />
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">
-                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
-              </p>
-            </div>
-          </div>
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-600">
-              <img src="" alt="" />
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">
-                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
-              </p>
-            </div>
-          </div>
+          <PrCard />
         </div>
       </div>
     </div>
