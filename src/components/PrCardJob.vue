@@ -37,6 +37,7 @@
               return null;
             }
           }));
+          console.log(newdata);
           this.items = newdata.filter((item) => item !== null);
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -54,7 +55,7 @@
           });
           const data = await response.json();
           // return data.industry === job.id;
-          return data.industry === "建設業";
+          return data.industry === "サービス業";//北海道だと5つ帰ってくる！
         } catch (error) {
           console.error('Error fetching data:', error);
           return false;

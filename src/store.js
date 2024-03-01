@@ -14,6 +14,7 @@ export const prefecture = reactive({
 
 export const job = reactive({
     id: 0,
+    name: '',
     getid() {
         return this.id
     },
