@@ -1,4 +1,19 @@
+<script>
+import { computed } from 'vue'
+import store from '@/store.js'
+
+export default {
+  setup() {
+    // ストアのステートをcomputedでラップして使用する
+    const prefertureName = computed(() => store.state.prefectureName)
+
+    return { prefertureName }
+  }
+}
+</script>
+
 <template>
+  {{ prefertureName }}
   <header class="bg-slate-800">
     <h1 class="pt-7 pb-5 ml-40 text-lg text-slate-200">都道府県別リリース一覧</h1>
   </header>
