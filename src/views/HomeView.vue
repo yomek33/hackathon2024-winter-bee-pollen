@@ -1,6 +1,7 @@
 <script>
 import { computed } from 'vue'
-import store from '@/store.js'
+// import store from '@/store.js'
+import { prefecture } from '@/store.js'
 import japanmap from '@/components/japanmap.vue'
 import PrCard from '@/components/PrCard.vue'
 
@@ -11,7 +12,7 @@ export default {
   },
   setup() {
     // ストアのステートをcomputedでラップして使用する
-    const prefertureName = computed(() => store.state.prefectureName)
+    const prefertureName = computed(() => prefecture.name)
 
     return { prefertureName }
   }

@@ -8,14 +8,7 @@ import PrCardJob from "@/components/PrCardJob.vue";
 <template>
   <header></header>
   <HomeView />
-<<<<<<< HEAD
-  <japanmap />
-  <PrCard />
-  <PrCardJob />
-  <RouterView />
-=======
   <!-- <PrCard /> -->
->>>>>>> main
 </template>
 
 <style scoped></style>
