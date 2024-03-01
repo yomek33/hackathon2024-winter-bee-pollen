@@ -77,7 +77,9 @@ export default {
     const getReleasesByPrefectureName = async (prefectureNameEn) => {
       try {
         // ex.) Iwate → 岩手県
-        const prefectureName = prefectureNames[prefectureNameEn];
+        const prefectureName = prefectureNames[prefectureNameEn]
+        store.commit('updatePrefectureName', prefectureName);
+        console.log(store.state.prefectureName) // TODO: debuggerなので削除する
         // ex.) 岩手県 → 5
         const prefectureId = await prefectureIdFromName(prefectureName);
         // ex.) 岩手県のID:5をもとに、岩手県のプレスリリースを取得

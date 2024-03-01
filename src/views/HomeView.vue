@@ -1,13 +1,24 @@
 <script>
-import japanmap from "../components/japanmap.vue";
-import PrCard from "../components/PrCard.vue";
+import { computed } from 'vue'
+import store from '@/store.js'
+import japanmap from '@/components/japanmap.vue'
+import PrCard from '@/components/PrCard.vue'
+
 export default {
-  components: {
+    components: {
     japanmap,
     PrCard,
   },
-};
+  setup() {
+    // ストアのステートをcomputedでラップして使用する
+    const prefertureName = computed(() => store.state.prefectureName)
+
+    return { prefertureName }
+  }
+  
+}
 </script>
+
 <template>
   <header class="bg-slate-800">
     <h1 class="pt-7 pb-5 ml-40 text-lg text-slate-200">
@@ -18,7 +29,7 @@ export default {
     <div class="flex justify-between  w-10/12 mx-auto min-h-screen">
       <japanmap />
       <div class="w-1/2 ml-8 border-2 p-8 rounded-lg">
-        <h2 class="text-lg mb-5">{{}}　リリース一覧</h2>
+        <h2 class="text-lg mb-5">  {{ prefertureName }}　リリース一覧</h2>
 
         <details class="accordion">
           <summary>業種を選ぶ</summary>
