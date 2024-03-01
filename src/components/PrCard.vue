@@ -2,7 +2,7 @@
 import { watch } from "vue";
 import store from "@/store.js";
 
-const token = process.env.API_KEY;
+const token = import.meta.env.VITE_APP_APY_KEY;
 
 const releaseCard = {
   data() {
