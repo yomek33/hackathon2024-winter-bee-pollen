@@ -1,15 +1,3 @@
-// import { createStore } from 'vuex';
-
-// export default createStore({
-//     state: {
-//         prefectureId: 0
-//     },
-//     mutations: {
-//         updatePrefectureId(state, newId) {
-//             state.prefectureId = newId;
-//         }
-//     }
-// });
 
 // store.js
 import { reactive } from 'vue'
@@ -31,5 +19,6 @@ export const job = reactive({
     },
     setid(newid) {
         this.id = newid
+
     }
 });
