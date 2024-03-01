@@ -8,20 +8,45 @@
         <img src="" alt="">
         <!-- 仮置きの画像です。 -->
       </div>
-      <div class="w-1/2 ml-8 border-2 p-8 rounded-lg">
-        <h2 class="text-lg mb-5">北海道札幌市　リリース一覧</h2>
-        
-        <details class="accordion">
-          <summary>業種を選ぶ</summary>
-          <div class="checkbox flex flex-wrap">
-            <label class="flex items-center relative"><input type="checkbox" name="" id="">建築</label>
-            <label><input type="checkbox" name="" id="">金融サービス</label>
-            <!-- ここはクリックするたびに変更するのか、選択してからまとめて変更するのか、どちらにしましょうか -->
-          </div>
-        </details>
+      <div class="w-1/2 ml-8 border-2 px-8 pb-8 rounded-lg overflow-auto">
+        <div class=" sticky top-0 bg-white pt-8 pb-3">
+          <h2 class="text-lg pb-5 top-0 bg-white">北海道札幌市　リリース一覧</h2>
+          
+          <details class="accordion z-0">
+            <summary><p class=" text-slate-800 hover:text-slate-400 hover:border-slate-400">業種で絞り込む</p></summary>
+            <!-- <form class="checkbox pt-2 px-2 grid grid-cols-3"> -->
+            <form class="checkbox pt-3 px-2">
+              <div class="flex">
+                <div class="w-5/12">
+                  <label><input type="checkbox" name="" id="">水産・農林業</label>
+                  <label><input type="checkbox" name="" id="">鉱業</label>
+                  <label><input type="checkbox" name="" id="">建設業</label>
+                  <label><input type="checkbox" name="" id="">製造業</label>
+                  <label><input type="checkbox" name="" id="">電気・ガス業</label>
+                  <label><input type="checkbox" name="" id="">倉庫・運輸関連業</label>
+                  <label><input type="checkbox" name="" id="">情報通信</label>
+                  <label><input type="checkbox" name="" id="">商業(卸売業、小売業)</label>
+                  <label><input type="checkbox" name="" id="">金融・保険業</label>
+                </div>
+                <div class="w-7/12">
+                  <label><input type="checkbox" name="" id="">不動産業</label>
+                  <label><input type="checkbox" name="" id="">飲食店・宿泊業</label>
+                  <label><input type="checkbox" name="" id="">医療・福祉</label>
+                  <label><input type="checkbox" name="" id="">教育・学習支援業</label>
+                  <label><input type="checkbox" name="" id="">サービス業</label>
+                  <label><input type="checkbox" name="" id="">官公庁・地方自治体</label>
+                  <label><input type="checkbox" name="" id="">財団法人・社団法人・宗教法人</label>
+                </div>
+              </div>
+              <div class="mt-2 mb-1">
+                <button class="mx-auto block px-5 py-0.5 rounded-md text-slate-600 hover:bg-slate-400 hover:text-white" type="submit">決定</button>
+              </div>
+            </form>
+          </details>
+        </div>
 
         <div class="articles divide-y divide-slate-500/2">
-          <div class="article flex mt-3 pt-3">
+          <div class="article flex pt-3">
             <div class="w-1/5 bg-red-200">
               <img src="" alt="">
             </div>
@@ -82,15 +107,14 @@
 main{
   height: calc(100vh - 121px);
 }
+
 #container-left {
   height: 500px;
 }
 
 /* チェックボックス見た目変更 */
 .checkbox {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5em 2em;
+
     border: none;
 }
 
@@ -115,10 +139,10 @@ main{
     top: 5px;
     left: 7px;
     transform: rotate(45deg);
-    width: 5px;
-    height: 10px;
+    width: 6px;
+    height: 11px;
     border: solid #000;
-    border-width: 0 3px 3px 0;
+    border-width: 0 2.5px 2.5px 0;
     content: '';
 }
 
@@ -128,50 +152,64 @@ main{
 
 /* アコーディオンメニュー設定 */
 .accordion {
-    max-width: 500px;
     margin-bottom: 7px;
 }
 
 .accordion summary {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     position: relative;
-    color: #333333;
-    font-weight: 600;
     cursor: pointer;
+}
+
+.accordion summary p {
+  border-bottom: 1px solid #333;
+}
+
+.accordion div button {
+  border: 1px solid;
+}
+
+.accordion div button:hover {
+  border-left: 4px;
 }
 
 .accordion summary::-webkit-details-marker {
     display: none;
 }
 
-/* .accordion summary::after {
-    transform: translateY(-25%) rotate(45deg);
+.accordion summary::after {
+    transform: rotate(-45deg) translateY(-10%);
     width: 7px;
     height: 7px;
-    margin-left: 10px;
-    border-bottom: 3px solid #333333b3;
-    border-right: 3px solid #333333b3;
+    border-bottom: 2.5px solid #333333b3;
+    border-right: 2.5px solid #333333b3;
+    margin-left: 8px;
     content: '';
     transition: transform .3s;
-} */
-
-.accordion[open] summary::after {
-    transform: rotate(225deg);
 }
 
-.accordion div {
+.accordion[open] summary::after {
+    transform: rotate(45deg) translateY(-35%);
+}
+
+.accordion form {
     transform: translateY(-10px);
     opacity: 0;
     margin: 0;
-    padding: .3em 2em 1.5em;
-    color: #333333;
     transition: transform .5s, opacity .5s;
 }
 
-.accordion[open] div {
+.accordion[open] form {
     transform: none;
     opacity: 1;
+}
+
+.accordion[open] {
+    border: grey 1px solid;
+    padding: 8px 8px;
+    border-radius: 4px;
+    margin: -8px -8px;
 }
 </style>
