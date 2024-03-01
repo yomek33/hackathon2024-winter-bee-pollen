@@ -7,7 +7,7 @@ import PrCard from "@/components/PrCard.vue";
 
 <template>
   <header></header>
-  <HomeView />
+  <!-- <HomeView /> -->
   <japanmap />
   <PrCard />
   <RouterView />

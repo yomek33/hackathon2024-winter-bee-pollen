@@ -1,21 +1,30 @@
+<script>
+import japanmap from "../components/japanmap.vue";
+export default {
+  components: {
+    japanmap,
+  },
+};
+</script>
 <template>
   <header class="bg-slate-800">
-    <h1 class="pt-7 pb-5 ml-40 text-lg text-slate-200">都道府県別リリース一覧</h1>
+    <h1 class="pt-7 pb-5 ml-40 text-lg text-slate-200">
+      都道府県別リリース一覧
+    </h1>
   </header>
   <main class="py-10 min-h-full">
     <div class="flex justify-between w-10/12 mx-auto h-[100%]">
-      <div class="w-1/2 bg-green-400 mr-8 rounded-lg">
-        <img src="" alt="">
-        <!-- 仮置きの画像です。 -->
-      </div>
+      <japanmap />
       <div class="w-1/2 ml-8 border-2 p-8 rounded-lg">
         <h2 class="text-lg mb-5">北海道札幌市　リリース一覧</h2>
-        
+
         <details class="accordion">
           <summary>業種を選ぶ</summary>
           <div class="checkbox flex flex-wrap">
-            <label class="flex items-center relative"><input type="checkbox" name="" id="">建築</label>
-            <label><input type="checkbox" name="" id="">金融サービス</label>
+            <label class="flex items-center relative"
+              ><input type="checkbox" name="" id="" />建築</label
+            >
+            <label><input type="checkbox" name="" id="" />金融サービス</label>
             <!-- ここはクリックするたびに変更するのか、選択してからまとめて変更するのか、どちらにしましょうか -->
           </div>
         </details>
@@ -23,63 +32,79 @@
         <div class="articles divide-y divide-slate-500/2">
           <div class="article flex mt-3 pt-3">
             <div class="w-1/5 bg-red-200">
-              <img src="" alt="">
+              <img src="" alt="" />
             </div>
             <div class="article_right w-4/5 ml-3">
               <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-slate-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
+              <p class="text-xs text-slate-700/95">
+                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
+              </p>
               <p class="text-xs text-slate-400"></p>
             </div>
           </div>
 
           <div class="article flex mt-3 pt-3">
             <div class="w-1/5 bg-red-300">
-              <img src="" alt="">
+              <img src="" alt="" />
             </div>
             <div class="article_right w-4/5 ml-3">
               <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
+              <p class="text-xs text-gray-700/95">
+                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
+              </p>
             </div>
           </div>
           <div class="article flex mt-3 pt-3">
             <div class="w-1/5 bg-red-500">
-              <img src="" alt="">
+              <img src="" alt="" />
             </div>
             <div class="article_right w-4/5 ml-3">
               <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
+              <p class="text-xs text-gray-700/95">
+                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
+              </p>
             </div>
           </div>
           <div class="article flex mt-3 pt-3">
             <div class="w-1/5 bg-red-400">
-              <img src="" alt="">
+              <img src="" alt="" />
             </div>
             <div class="article_right w-4/5 ml-3">
               <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
+              <p class="text-xs text-gray-700/95">
+                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
+              </p>
             </div>
           </div>
           <div class="article flex mt-3 pt-3">
             <div class="w-1/5 bg-red-600">
-              <img src="" alt="">
+              <img src="" alt="" />
             </div>
             <div class="article_right w-4/5 ml-3">
               <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
+              <p class="text-xs text-gray-700/95">
+                ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。
+              </p>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </main>
-  <footer class="absolute inset-x-0 bottom-0 text-gray-400 text-sm bg-blue-500 pt-3 pb-3">
-    <p class="text-center"><small>Copyright &copy; 2024 hackathon2024-winter-BeePollen All rights reserved.</small></p>
+  <footer
+    class="absolute inset-x-0 bottom-0 text-gray-400 text-sm bg-blue-500 pt-3 pb-3"
+  >
+    <p class="text-center">
+      <small
+        >Copyright &copy; 2024 hackathon2024-winter-BeePollen All rights
+        reserved.</small
+      >
+    </p>
   </footer>
 </template>
 
 <style>
-main{
+main {
   height: calc(100vh - 121px);
 }
 #container-left {
@@ -88,62 +113,62 @@ main{
 
 /* チェックボックス見た目変更 */
 .checkbox {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5em 2em;
-    border: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 2em;
+  border: none;
 }
 
 .checkbox label {
-    display: flex;
-    align-items: center;
-    gap: 0 .5em;
-    position: relative;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0 0.5em;
+  position: relative;
+  cursor: pointer;
 }
 
 .checkbox label::before {
-    width: 18px;
-    height: 18px;
-    border-radius: 3px;
-    border: 2px solid #d6dde3;
-    content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 2px solid #d6dde3;
+  content: "";
 }
 
 .checkbox label:has(:checked)::after {
-    position: absolute;
-    top: 5px;
-    left: 7px;
-    transform: rotate(45deg);
-    width: 5px;
-    height: 10px;
-    border: solid #000;
-    border-width: 0 3px 3px 0;
-    content: '';
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  transform: rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border: solid #000;
+  border-width: 0 3px 3px 0;
+  content: "";
 }
 
 .checkbox input {
-    display: none;
+  display: none;
 }
 
 /* アコーディオンメニュー設定 */
 .accordion {
-    max-width: 500px;
-    margin-bottom: 7px;
+  max-width: 500px;
+  margin-bottom: 7px;
 }
 
 .accordion summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    color: #333333;
-    font-weight: 600;
-    cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  color: #333333;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .accordion summary::-webkit-details-marker {
-    display: none;
+  display: none;
 }
 
 /* .accordion summary::after {
@@ -158,20 +183,20 @@ main{
 } */
 
 .accordion[open] summary::after {
-    transform: rotate(225deg);
+  transform: rotate(225deg);
 }
 
 .accordion div {
-    transform: translateY(-10px);
-    opacity: 0;
-    margin: 0;
-    padding: .3em 2em 1.5em;
-    color: #333333;
-    transition: transform .5s, opacity .5s;
+  transform: translateY(-10px);
+  opacity: 0;
+  margin: 0;
+  padding: 0.3em 2em 1.5em;
+  color: #333333;
+  transition: transform 0.5s, opacity 0.5s;
 }
 
 .accordion[open] div {
-    transform: none;
-    opacity: 1;
+  transform: none;
+  opacity: 1;
 }
 </style>
