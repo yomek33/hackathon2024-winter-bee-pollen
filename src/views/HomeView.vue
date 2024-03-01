@@ -14,11 +14,11 @@ export default {
       都道府県別リリース一覧
     </h1>
   </header>
-  <main class="py-10 min-h-full">
-    <div class="flex justify-between w-10/12 mx-auto h-[100%]">
+  <main class="py-10 min-h-full flex-grow">
+    <div class="flex justify-between  w-10/12 mx-auto min-h-screen">
       <japanmap />
       <div class="w-1/2 ml-8 border-2 p-8 rounded-lg">
-        <h2 class="text-lg mb-5">北海道札幌市　リリース一覧</h2>
+        <h2 class="text-lg mb-5">{{}}　リリース一覧</h2>
 
         <details class="accordion">
           <summary>業種を選ぶ</summary>
@@ -38,7 +38,7 @@ export default {
     </div>
   </main>
   <footer
-    class="absolute inset-x-0 bottom-0 text-gray-400 text-sm bg-blue-500 pt-3 pb-3"
+    class=" fixed inset-x-0 bottom-0 text-gray-400 text-sm bg-blue-500 pt-3 pb-3"
   >
     <p class="text-center">
       <small
