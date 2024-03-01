@@ -1,16 +1,37 @@
+<script>
+import { computed } from 'vue'
+import store from '@/store.js'
+import japanmap from '@/components/japanmap.vue'
+import PrCard from '@/components/PrCard.vue'
+
+export default {
+    components: {
+    japanmap,
+    PrCard,
+  },
+  setup() {
+    // ストアのステートをcomputedでラップして使用する
+    const prefertureName = computed(() => store.state.prefectureName)
+
+    return { prefertureName }
+  }
+  
+}
+</script>
+
 <template>
   <header class="bg-slate-800">
-    <h1 class="pt-7 pb-5 ml-40 text-lg text-slate-200">都道府県別リリース一覧</h1>
+    <h1 class="pt-7 pb-5 ml-40 text-lg text-slate-200">
+      都道府県別リリース一覧
+    </h1>
   </header>
-  <main class="py-10 min-h-full">
-    <div class="flex justify-between w-10/12 mx-auto h-[100%]">
-      <div class="w-1/2 bg-green-400 mr-8 rounded-lg">
-        <img src="" alt="">
-        <!-- 仮置きの画像です。 -->
-      </div>
+  
+  <main class="py-10 min-h-full flex-frow">
+    <div class="flex justify-between w-10/12 mx-auto min-h-screen">
+      <japanmap />
       <div class="w-1/2 ml-8 border-2 px-8 pb-8 rounded-lg overflow-auto">
         <div class=" sticky top-0 bg-white pt-8 pb-3">
-          <h2 class="text-lg pb-5 top-0 bg-white">北海道札幌市　リリース一覧</h2>
+          <h2 class="text-lg pb-5 top-0 bg-white">{{ prefertureName }}　リリース一覧</h2>
           
           <details class="accordion z-0">
             <summary><p class=" text-slate-800 hover:text-slate-400 hover:border-slate-400">業種で絞り込む</p></summary>
@@ -46,65 +67,25 @@
         </div>
 
         <div class="articles divide-y divide-slate-500/2">
-          <div class="article flex pt-3">
-            <div class="w-1/5 bg-red-200">
-              <img src="" alt="">
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-slate-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
-              <p class="text-xs text-slate-400"></p>
-            </div>
-          </div>
-
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-300">
-              <img src="" alt="">
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
-            </div>
-          </div>
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-500">
-              <img src="" alt="">
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
-            </div>
-          </div>
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-400">
-              <img src="" alt="">
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
-            </div>
-          </div>
-          <div class="article flex mt-3 pt-3">
-            <div class="w-1/5 bg-red-600">
-              <img src="" alt="">
-            </div>
-            <div class="article_right w-4/5 ml-3">
-              <h3 class="mb-1">リリース記事タイトル</h3>
-              <p class="text-xs text-gray-700/95">ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。ここにリリース記事の本文が表示されます。</p>
-            </div>
-          </div>
-
+          <PrCard />
         </div>
       </div>
     </div>
   </main>
-  <footer class="absolute inset-x-0 bottom-0 text-gray-400 text-sm bg-blue-500 pt-3 pb-3">
-    <p class="text-center"><small>Copyright &copy; 2024 hackathon2024-winter-BeePollen All rights reserved.</small></p>
+  <footer
+    class=" fixed inset-x-0 bottom-0 text-gray-400 text-sm bg-blue-500 pt-3 pb-3"
+  >
+    <p class="text-center">
+      <small
+        >Copyright &copy; 2024 hackathon2024-winter-BeePollen All rights
+        reserved.</small
+      >
+    </p>
   </footer>
 </template>
 
 <style>
-main{
+main {
   height: calc(100vh - 121px);
 }
 
@@ -114,40 +95,39 @@ main{
 
 /* チェックボックス見た目変更 */
 .checkbox {
-
     border: none;
 }
 
 .checkbox label {
-    display: flex;
-    align-items: center;
-    gap: 0 .5em;
-    position: relative;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0 0.5em;
+  position: relative;
+  cursor: pointer;
 }
 
 .checkbox label::before {
-    width: 18px;
-    height: 18px;
-    border-radius: 3px;
-    border: 2px solid #d6dde3;
-    content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 2px solid #d6dde3;
+  content: "";
 }
 
 .checkbox label:has(:checked)::after {
-    position: absolute;
-    top: 5px;
-    left: 7px;
-    transform: rotate(45deg);
-    width: 6px;
-    height: 11px;
-    border: solid #000;
-    border-width: 0 2.5px 2.5px 0;
-    content: '';
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  transform: rotate(45deg);
+  width: 6px;
+  height: 11px;
+  border: solid #000;
+  border-width: 0 2.5px 2.5px 0;
+  content: '';
 }
 
 .checkbox input {
-    display: none;
+  display: none;
 }
 
 /* アコーディオンメニュー設定 */
@@ -156,11 +136,11 @@ main{
 }
 
 .accordion summary {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    position: relative;
-    cursor: pointer;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .accordion summary p {
@@ -176,7 +156,7 @@ main{
 }
 
 .accordion summary::-webkit-details-marker {
-    display: none;
+  display: none;
 }
 
 .accordion summary::after {
