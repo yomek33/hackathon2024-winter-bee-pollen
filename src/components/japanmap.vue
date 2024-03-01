@@ -182,7 +182,7 @@ export default {
 
 <style>
 #chartdiv {
-  width: 500px;
-  height: 800px;
+  width: 700px;
+  height: 1000px;
 }
 </style>
