@@ -19,60 +19,60 @@ export default {
 
     // NOTE: 日本地図を描写し、クリックした都道府県のプレスリリースを一覧で表示させる
     // Mapを作る
+    const loadMap = () => {
+      const root = am5.Root.new("chartdiv");
+      const chart = root.container.children.push(
+        am5map.MapChart.new(root, {
+          projection: am5map.geoMercator(),
+          homeGeoPoint: { longitude: 0, latitude: 0 },
+          panX: "none",
+          panY: "none",
+          wheelX: "none",
+          wheelY: "none",
+          pinchZoom: false,
+        })
+      );
 
-    const root = am5.Root.new("chartdiv");
-    const chart = root.container.children.push(
-      am5map.MapChart.new(root, {
-        projection: am5map.geoMercator(),
-        homeGeoPoint: { longitude: 0, latitude: 0 },
-        panX: "none",
-        panY: "none",
-        wheelX: "none",
-        wheelY: "none",
-        pinchZoom: false,
-      })
-    );
+      const polygonSeries = chart.series.push(
+        am5map.MapPolygonSeries.new(root, {
+          geoJSON: am5geodata_japanLow,
+          valueField: "value",
+          calculateAggregates: true,
+          fill: am5.color(0xf3f3f3),
+          stroke: am5.color(0x000000),
+        })
+      );
 
-    const polygonSeries = chart.series.push(
-      am5map.MapPolygonSeries.new(root, {
-        geoJSON: am5geodata_japanLow,
-        valueField: "value",
-        calculateAggregates: true,
-        fill: am5.color(0xf3f3f3),
-        stroke: am5.color(0x000000),
-      })
-    );
+      polygonSeries.mapPolygons.template.setAll({
+        interactive: true,
+        templateField: "settings",
+      });
 
-    polygonSeries.mapPolygons.template.setAll({
-      interactive: true,
-      templateField: "settings",
-    });
+      polygonSeries.mapPolygons.template.states.create("highlight", {
+        fill: am5.color(0x6794dc),
+        stroke: am5.color(0x6794dc),
+      });
 
-    polygonSeries.mapPolygons.template.states.create("highlight", {
-      fill: am5.color(0x6794dc),
-      stroke: am5.color(0x6794dc),
-    });
-
-    // Clickされたら、その県の名前を表示して着色する
-    let activePolygon;
-    polygonSeries.mapPolygons.template.events.on("click", (ev) => {
-      const polygon = ev.target;
-      if (activePolygon && activePolygon !== polygon) {
-        activePolygon.states.applyAnimate("default");
-        activePolygon = undefined;
+      // Clickされたら、その県の名前を表示して着色する
+      let activePolygon;
+      polygonSeries.mapPolygons.template.events.on("click", (ev) => {
+        const polygon = ev.target;
+        if (activePolygon && activePolygon !== polygon) {
+          activePolygon.states.applyAnimate("default");
+          activePolygon = undefined;
+          selectedPrefecture.value = polygon.dataItem.dataContext.name;
+          getReleasesByPrefectureName(selectedPrefecture.value); // NOTE: プレスリリース一覧を取得
+        }
         selectedPrefecture.value = polygon.dataItem.dataContext.name;
-        getReleasesByPrefectureName(selectedPrefecture.value); // NOTE: プレスリリース一覧を取得
-      }
-      selectedPrefecture.value = polygon.dataItem.dataContext.name;
-      console.log("Selected region:", selectedPrefecture.value);
-      polygon.states.applyAnimate("highlight");
-      activePolygon = polygon;
-    });
-    polygonSeries.mapPolygons.template.events.on("hover", (ev) => {
-      const polygon = ev.target;
-      polygon.states.applyAnimate("highlight");
-    });
-
+        console.log("Selected region:", selectedPrefecture.value);
+        polygon.states.applyAnimate("highlight");
+        activePolygon = polygon;
+      });
+      polygonSeries.mapPolygons.template.events.on("hover", (ev) => {
+        const polygon = ev.target;
+        polygon.states.applyAnimate("highlight");
+      });
+    };
     // NOTE: クリックによって渡された都道府県（アルファベット）をゴニョゴニョ変換してプレスリリースを取得する
     const getReleasesByPrefectureName = async (prefectureNameEn) => {
       try {
@@ -167,9 +167,9 @@ export default {
       Yamanashi: "山梨県",
     };
     // NOTE: 最初に日本地図を描画するのに必要
-    // onMounted(() => {
-    //   loadMap();
-    // });
+    onMounted(() => {
+      loadMap();
+    });
     // onUnmounted(() => {
     //   if (chart) {
     //     chart.dispose();
